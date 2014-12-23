@@ -7,25 +7,35 @@ public class Func extends PoJo implements Serializable {
 
     private static final long serialVersionUID = -605734224514108555L;
 
-    private long id=-1l;
+    private long id=-1l;//表Id
 
-    private String name;
+    private String name;//名字
 
-    private String uri;
+    private String uri;//uri
 
-    private int type=-1;
+    private int type=-1;//类型, 0 菜单型，1 按钮型
 
-    private Date created;
+    private Date created;//创建时间
 
-    private String creater;
+    private String creater;//创建者 ,系统默认功能为SYSTEM_ADMIN
 
-    private Date updated;
+    private Date updated;//修改时间
 
-    private long parentId=-1l;
+    private long parentId=-1l;//父菜单
 
-    private String description;
+    
+    private String description;//描述
 
-    private String pageName;
+    private int sort=-1;//同一级别功能菜单的排序
+    
+    public int getSort() {
+        return sort;
+    }
+
+    
+    public void setSort(int sort) {
+        this.sort = sort;
+    }
 
     public long getId() {
         return id;
@@ -98,13 +108,4 @@ public class Func extends PoJo implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public String getPageName() {
-        return pageName;
-    }
-
-    public void setPageName(String pageName) {
-        this.pageName = pageName;
-    }
-
 }

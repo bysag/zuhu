@@ -15,13 +15,13 @@ import com.zuhu.system.util.DateUtil;
 @Service
 public class FuncDao extends Dao<Func> {
 
-    private final static String SELECT_COMMON = " SELECT　id,  NAME, uri, TYPE, created, creater, updated, parent_id, description,page_name FROM func  ";
+    private final static String SELECT_COMMON = " SELECT　id,  NAME, uri, TYPE, created, creater, updated, parent_id, description,sort FROM func  ";
 
     private final static String COUNT = " SELECT count(*) FROM func ";
 
-    private final static String INSERT = " INSERT INTO func (NAME, uri, TYPE, created, creater, updated, parent_id, description,page_name) VALUES( ?, ?, ?, ?, ?, ?, ?, ?,?);";
+    private final static String INSERT = " INSERT INTO func (NAME, uri, TYPE, created, creater, updated, parent_id, description,sort) VALUES( ?, ?, ?, ?, ?, ?, ?, ?,?);";
 
-    private final static String UPDATE = "UPDATE func SET SET NAME =?,uri = ?,TYPE =?,updated = ? ,parent_id = ? ,description = ? ,page_name = ? WHERE id = %s ;";
+    private final static String UPDATE = "UPDATE func SET SET NAME =?,uri = ?,TYPE =?,updated = ? ,parent_id = ? ,description = ? ,sort = ? WHERE id = %s ;";
 
     private final static String MANAGER_FUNC_LIST = " SELECT * FROM func f,role_func rf WHERE rf.roleId IN (:roleIds) AND f.id = rf.funcId order by f.created asc ;";
     
@@ -58,15 +58,9 @@ public class FuncDao extends Dao<Func> {
     }
     
     public int update(Func func) {
-        func.setCreated(null);
-        func.setCreater(null);
-        return super.update(String.format(UPDATE, func.getId()), objectConvertArray(func));
+        return super.update(UPDATE,new Object[]{});
     }
     
-    public static void main(String[] args) {
-        System.out.println(String.format(UPDATE, "111"));
-    }
-
     // TODO 拼凑sql
     public void generatorWhere(Func func, StringBuilder sbr, List<Object> params) {
         if (func == null) {
@@ -92,10 +86,6 @@ public class FuncDao extends Dao<Func> {
             sbr.append(" parent_id = ? and ");
             params.add(func.getParentId());
         } 
-        if (StringUtils.isNotBlank(func.getPageName())) {
-            sbr.append(" parent_name like '%?%' and ");
-            params.add(func.getPageName());
-        } 
         if (func.getUpdated() != null) {
             sbr.append(" updated = ? and ");
             params.add(DateUtil.format(func.getUpdated(), DateUtil.PATTERN_YYYY_MM_DD_HH_MM_SS));
@@ -109,30 +99,15 @@ public class FuncDao extends Dao<Func> {
     public Object[] objectConvertArray(Func func) {
         if (func == null) return null;
         List<Object> result = new ArrayList<Object>();
-        if (StringUtils.isNotBlank(func.getName())) {
-            result.add(func.getName());
-        }
-        if (StringUtils.isNotBlank(func.getUri())) {
-            result.add(func.getUri());
-        }
-        if (func.getType() != -1) {
-            result.add(func.getType());
-        }
-        if (func.getCreated() != null) {
-            result.add(func.getCreated());
-        }
-        if (func.getUpdated() != null) {
-            result.add(func.getUpdated());
-        }
-        if (func.getParentId() != -1) {
-            result.add(func.getParentId());
-        }
-        if (StringUtils.isNotBlank(func.getDescription())) {
-            result.add(func.getDescription());
-        }
-        if (StringUtils.isNotBlank(func.getPageName())) {
-            result.add(func.getPageName());
-        }
+        result.add(func.getName());
+        result.add(func.getUri());
+        result.add(func.getType());
+        result.add(func.getCreated());
+        result.add(func.getCreater());
+        result.add(func.getUpdated());
+        result.add(func.getParentId());
+        result.add(func.getDescription());
+        result.add(func.getSort());
         return result.toArray();
     }
     
