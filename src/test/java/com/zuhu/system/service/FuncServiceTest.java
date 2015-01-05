@@ -97,19 +97,21 @@ public class FuncServiceTest {
         assertEquals(1, size);
     }
     
-    //@Test
+    @Test
     public void selectAllBylimitOffset(){
          List<Func> funcs = funcService.getFuncs(2, 0);
          assertEquals(2, funcs.size());
     }
     
-    @Test
+    //@Test
     public void selectAllByWhere(){
         Func func  = new Func();
-        func.setName("系统1");
-       // func.setId(1l);
+        func.setName("系统");
+        func.setId(1l);
         List<Func> funcsByWhere = funcService.getFuncsByWhere(func, 10, 0);
         assertEquals(1, funcsByWhere.size());
     }
+    
+    
 
 }

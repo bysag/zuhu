@@ -1,8 +1,5 @@
 package com.zuhu.system.dao;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,12 +8,7 @@ import javax.annotation.Resource;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.util.CollectionUtils;
-
-import com.zuhu.system.global.GlobalConstant;
-import com.zuhu.system.pojo.Func;
 
 public abstract class Dao<T> {
 
