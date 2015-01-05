@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.util.CollectionUtils;
 
@@ -45,10 +46,10 @@ public abstract class Dao<T> {
         return jdbcTemplate.update(updateSql, params);
     }
 
-    public int count(String selectSql, Object[] params) {
+    public int count(String selectSql, Map<String, Object> params) {
         if (StringUtils.isBlank(selectSql)) return 0;
-        if (ArrayUtils.isEmpty(params)) return 0;
-        return jdbcTemplate.queryForInt(selectSql, params);
+        if (params==null||params.size()==0) return 0;
+        return namedParameterJdbcTemplate.queryForInt(selectSql,params);
     }
 
     public int countWithIn(String selectSql, Map<String, Object> params) {
@@ -57,21 +58,15 @@ public abstract class Dao<T> {
         return namedParameterJdbcTemplate.queryForInt(selectSql, params);
     }
 
-    public void generatorLimitOffset(StringBuilder sbr, List<Object> params, int limit, int offset) {
-        if (StringUtils.isBlank(sbr.toString())) {
-            return;
-        }
-        if (CollectionUtils.isEmpty(params)) {
-            return;
-        }
+    public void generatorLimitOffset(StringBuilder sbr, Map<String, Object> params, int limit, int offset) {
         if (limit == 0) {
             limit = LIMIT;
         }
         if (offset < 0) {
             offset = OFFSET;
         }
-        sbr.append(" limit ? offset ? ;");
-        params.add(limit);
-        params.add(offset);
+        sbr.append(" limit :limit offset :offset ;");
+        params.put("limit", limit);
+        params.put("offset",offset);
     }
 }

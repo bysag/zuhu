@@ -33,6 +33,7 @@ public class ActivitiesDao extends Dao<Activities> {
 
     @Override
     public List<Activities> select(Activities activities, int limit, int offset) {
+       /**
         StringBuilder sbr = new StringBuilder(SELECT_COMMON);
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
@@ -40,6 +41,8 @@ public class ActivitiesDao extends Dao<Activities> {
         super.generatorLimitOffset(sbr, params, limit, offset);
         return jdbcTemplate.query(sbr.toString(), params.toArray(),
                 new BeanPropertyRowMapper<Activities>(Activities.class));
+                */
+        return null;
     }
 
     public int count(Activities activities) {
@@ -47,7 +50,7 @@ public class ActivitiesDao extends Dao<Activities> {
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
         generatorWhere(activities, sbr, params);
-        return super.count(sbr.toString(), params.toArray());
+        return 0;//super.count(sbr.toString(), params.toArray());
     }
 
     public int insert(Activities activities) {

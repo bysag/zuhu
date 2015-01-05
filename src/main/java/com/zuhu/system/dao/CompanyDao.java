@@ -32,6 +32,7 @@ public class CompanyDao extends Dao<Company> {
     }
     @Override
     public List<Company> select(Company company, int limit, int offset) {
+        /**
         StringBuilder sbr = new StringBuilder(SELECT_COMMON);
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
@@ -39,6 +40,8 @@ public class CompanyDao extends Dao<Company> {
         super.generatorLimitOffset(sbr, params, limit, offset);
         return jdbcTemplate.query(sbr.toString(), params.toArray(),
                 new BeanPropertyRowMapper<Company>(Company.class));
+                */
+        return null;
     }
 
 
@@ -47,7 +50,7 @@ public class CompanyDao extends Dao<Company> {
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
         generatorWhere(company, sbr, params);
-        return super.count(sbr.toString(), params.toArray());
+        return 0;//super.count(sbr.toString(), params.toArray());
     }
 
     public int insert(Company company) {

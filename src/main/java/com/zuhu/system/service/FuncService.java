@@ -39,7 +39,7 @@ public class FuncService {
      * @return
      */
     public int update(Func func){
-        return funcDao.insert(func);
+        return funcDao.update(func);
     }
     
     /**

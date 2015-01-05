@@ -32,6 +32,7 @@ public class ShopDao extends Dao<Shop> {
     }
     @Override
     public List<Shop> select(Shop shop, int limit, int offset) {
+       /**
         StringBuilder sbr = new StringBuilder(SELECT_COMMON);
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
@@ -39,6 +40,8 @@ public class ShopDao extends Dao<Shop> {
         super.generatorLimitOffset(sbr, params, limit, offset);
         return jdbcTemplate.query(sbr.toString(), params.toArray(),
                 new BeanPropertyRowMapper<Shop>(Shop.class));
+                */
+        return null;
     }
 
 
@@ -47,7 +50,7 @@ public class ShopDao extends Dao<Shop> {
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
         generatorWhere(shop, sbr, params);
-        return super.count(sbr.toString(), params.toArray());
+        return 0;//super.count(sbr.toString(), params.toArray());
     }
 
     public int insert(Shop shop) {

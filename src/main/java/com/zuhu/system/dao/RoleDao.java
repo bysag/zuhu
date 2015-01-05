@@ -39,6 +39,7 @@ public class RoleDao extends Dao<Role> {
 
     @Override
     public List<Role> select(Role role, int limit, int offset) {
+        /**
         StringBuilder sbr = new StringBuilder(SELECT_COMMON);
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
@@ -46,6 +47,8 @@ public class RoleDao extends Dao<Role> {
         super.generatorLimitOffset(sbr, params, limit, offset);
         return jdbcTemplate.query(sbr.toString(), params.toArray(),
                 new BeanPropertyRowMapper<Role>(Role.class));
+                */
+        return null;
     }
 
     public int count(Role role) {
@@ -53,7 +56,7 @@ public class RoleDao extends Dao<Role> {
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
         generatorWhere(role, sbr, params);
-        return super.count(sbr.toString(), params.toArray());
+        return 0;//super.count(sbr.toString(), params.toArray());
     }
 
     public int insert(Role role) {

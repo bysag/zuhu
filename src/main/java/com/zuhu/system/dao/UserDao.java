@@ -32,6 +32,7 @@ public class UserDao extends Dao<User> {
     }
     @Override
     public List<User> select(User user, int limit, int offset) {
+        /**
         StringBuilder sbr = new StringBuilder(SELECT_COMMON);
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
@@ -39,6 +40,8 @@ public class UserDao extends Dao<User> {
         super.generatorLimitOffset(sbr, params, limit, offset);
         return jdbcTemplate.query(sbr.toString(), params.toArray(),
                 new BeanPropertyRowMapper<User>(User.class));
+                */
+        return null;
     }
 
     public int count(User user) {
@@ -46,7 +49,7 @@ public class UserDao extends Dao<User> {
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
         generatorWhere(user, sbr, params);
-        return super.count(sbr.toString(), params.toArray());
+        return 0;//super.count(sbr.toString(), params.toArray());
     }
 
     public int insert(User user) {

@@ -6,6 +6,7 @@ package com.zuhu.system.service;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -15,7 +16,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.aop.framework.adapter.GlobalAdvisorAdapterRegistry;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -62,7 +62,7 @@ public class FuncServiceTest {
     public void tearDown() throws Exception {
     }
 
-    @Test
+    //@Test
     public void insert(){
         Func func = new Func();
         Date date = new Date();
@@ -79,6 +79,37 @@ public class FuncServiceTest {
         assertEquals(1, size);
     }
     
+  
+    //@Test
+    public void getFunc(){
+        long funcId = 1l;
+        Func func = funcService.getFunc(funcId);
+        assertNotNull(func);
+        assertEquals("系统功能", func.getName());
+    }
+
+    //@Test
+    public void update(){
+        Func func = new Func();
+        func.setId(1l);
+        func.setSort(5);
+        int size = funcService.update(func);
+        assertEquals(1, size);
+    }
     
+    //@Test
+    public void selectAllBylimitOffset(){
+         List<Func> funcs = funcService.getFuncs(2, 0);
+         assertEquals(2, funcs.size());
+    }
+    
+    @Test
+    public void selectAllByWhere(){
+        Func func  = new Func();
+        func.setName("系统1");
+       // func.setId(1l);
+        List<Func> funcsByWhere = funcService.getFuncsByWhere(func, 10, 0);
+        assertEquals(1, funcsByWhere.size());
+    }
 
 }

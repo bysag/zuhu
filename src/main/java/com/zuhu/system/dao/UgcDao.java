@@ -31,6 +31,7 @@ public class UgcDao extends Dao<UGC>{
     }
     @Override
     public List<UGC> select(UGC ugc, int limit, int offset) {
+        /**
         StringBuilder sbr = new StringBuilder(SELECT_COMMON);
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
@@ -38,6 +39,8 @@ public class UgcDao extends Dao<UGC>{
         super.generatorLimitOffset(sbr, params, limit, offset);
         return jdbcTemplate.query(sbr.toString(), params.toArray(),
                 new BeanPropertyRowMapper<UGC>(UGC.class));
+                */
+        return null;
     }
 
 
@@ -46,7 +49,7 @@ public class UgcDao extends Dao<UGC>{
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
         generatorWhere(ugc, sbr, params);
-        return super.count(sbr.toString(), params.toArray());
+        return 0;//uper.count(sbr.toString(), params.toArray());
     }
 
     public int insert(UGC ugc) {

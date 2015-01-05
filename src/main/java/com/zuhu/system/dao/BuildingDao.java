@@ -32,6 +32,7 @@ public class BuildingDao extends Dao<Building> {
     }
     @Override
     public List<Building> select(Building building, int limit, int offset) {
+        /**
         StringBuilder sbr = new StringBuilder(SELECT_COMMON);
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
@@ -39,6 +40,8 @@ public class BuildingDao extends Dao<Building> {
         super.generatorLimitOffset(sbr, params, limit, offset);
         return jdbcTemplate.query(sbr.toString(), params.toArray(),
                 new BeanPropertyRowMapper<Building>(Building.class));
+                */
+        return null;
     }
 
 
@@ -47,7 +50,7 @@ public class BuildingDao extends Dao<Building> {
         sbr.append(" where ");
         List<Object> params = new ArrayList<Object>();
         generatorWhere(building, sbr, params);
-        return super.count(sbr.toString(), params.toArray());
+        return 0;//super.count(sbr.toString(), params.toArray());
     }
 
     public int insert(Building building) {
