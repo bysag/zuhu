@@ -5,6 +5,8 @@ import com.zuhu.system.pojo.Manager;
 
 public class CurrentLoginManager {
     public static Manager getCurrentManager(){
-        return null;
+        Manager manager = new Manager();
+        manager.setCode("yunan.zheng");
+        return manager;
     }
 }

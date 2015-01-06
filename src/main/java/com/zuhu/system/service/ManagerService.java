@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zuhu.system.dao.FuncDao;
 import com.zuhu.system.dao.ManagerDao;
@@ -35,18 +36,29 @@ public class ManagerService {
      * 新增管理员
      * @return
      */
+    @Transactional
     public int addManager(Manager manager){
         int result = 0;
+        Manager selectManager = new Manager();
+        selectManager.setCode(manager.getCode());
+        Manager selectResultManager = managerDao.selectSingle(selectManager);
+        if (selectResultManager!=null) {
+            return result;
+        }
         if(managerDao.insert(manager)>0){
-            int [] insertRes = roleDao.insertManagerRole(generatorInsertManagerRoleParams(manager));
-            result = insertRes.length;
+            roleDao.delManagerRoleByManagerCode(manager.getCode());
+            roleDao.insertManagerRole(generatorInsertManagerRoleParams(manager));
+            result = 1;
         }
         return result;
     }
     
     private List<Object[]> generatorInsertManagerRoleParams(Manager manager){
         List<Object[]> insertParams = new ArrayList<Object[]>();
-        for (long roleId : manager.getRoleId()) {
+        for (Long roleId : manager.getRoleId()) {
+            if (roleId==null) {
+                continue;
+            }
             List<Object> element = new ArrayList<Object>();
             element.add(manager.getCode());
             element.add(roleId);
@@ -61,12 +73,13 @@ public class ManagerService {
      * 修改管理员信息
      * @return
      */
+    @Transactional
     public int updateManager(Manager manager){
         int result = 0;
         if(managerDao.update(manager)>0){
             roleDao.delManagerRoleByManagerCode(manager.getCode());
-            int [] insertRes = roleDao.insertManagerRole(generatorInsertManagerRoleParams(manager));
-            result = insertRes.length;
+            roleDao.insertManagerRole(generatorInsertManagerRoleParams(manager));
+            result = 1;
          }
         return result;
     }
