@@ -17,11 +17,52 @@ public class User extends PoJo implements Serializable {
 
     private Date created;
 
-    private int type = -1;
+    private String type = "";
 
     private int status = -1;
-    
+
     private Date updated;
+
+    private String updater;
+
+    private String thirdpartyType;
+
+    private String mobile;
+
+    private String email;
+    
+    public String getEmail() {
+        return email;
+    }
+
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+    public String getThirdpartyType() {
+        return thirdpartyType;
+    }
+
+    public void setThirdpartyType(String thirdpartyType) {
+        this.thirdpartyType = thirdpartyType;
+    }
 
     public int getId() {
         return id;
@@ -63,11 +104,11 @@ public class User extends PoJo implements Serializable {
         this.created = created;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -79,14 +120,12 @@ public class User extends PoJo implements Serializable {
         this.status = status;
     }
 
-    
     public Date getUpdated() {
         return updated;
     }
 
-    
     public void setUpdated(Date updated) {
         this.updated = updated;
     }
-    
+
 }

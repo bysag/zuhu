@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UserDetail extends User implements Serializable {
-
+    
     private static final long serialVersionUID = -2031684642409293522L;
 
     private String realname;
@@ -25,7 +25,7 @@ public class UserDetail extends User implements Serializable {
 
     private Date updated;
 
-    private String creator;
+    private String updater;
     
     public String getRealname() {
         return realname;
@@ -117,13 +117,13 @@ public class UserDetail extends User implements Serializable {
     }
 
     
-    public String getCreator() {
-        return creator;
+    public String getUpdater() {
+        return updater;
     }
 
     
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setUpdater(String updater) {
+        this.updater = updater;
     }
     
     

@@ -9,8 +9,8 @@ package com.zuhu.system.global;
 
 public enum UserType {
     SHOPER("商店老板"),ZUHU("租户"),HOUSE_OWN("房东");
-    public String name;
-    UserType(String name){
-        this.name = name;
+    public String desc;
+    UserType(String desc){
+        this.desc = desc;
     }
 }
